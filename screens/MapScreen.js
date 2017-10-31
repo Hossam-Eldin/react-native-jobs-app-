@@ -3,7 +3,7 @@ import {StyleSheet, View, ActivityIndicator} from "react-native";
 import {Button , Icon} from  'react-native-elements';
 import {MapView} from "expo";
 import {connect} from 'react-redux';
-// import * as actions from '../actions';
+import * as actions from '../actions';
 
 
 class MapScreen extends React.Component {
@@ -30,9 +30,9 @@ class MapScreen extends React.Component {
     };
 
     onButtonPress = () => {
-        // this.props.fetchJobs(this.state.region, () => {
+        this.props.fetchJobs(this.state.region, () => {
             this.props.navigation.navigate('deck');
-        // });
+        });
     };
 
     render() {
@@ -46,6 +46,17 @@ class MapScreen extends React.Component {
         }
         return (
             <View style={styles.container}>
+
+                <View style={styles.iconContainer}>
+                    <Icon
+                        raised
+                        name='bars'
+                        type='font-awesome'
+                        color='#009688'
+                        onPress={()=>this.props.navigation.navigate('DrawerToggle')} />
+
+                </View>
+
 
                 <MapView
                     style={{flex: 1}}
@@ -79,7 +90,15 @@ const styles = StyleSheet.create({
         bottom: 20,
         left:0,
         right:0
+    },
+    iconContainer:{
+        position: 'absolute',
+        top: 25,
+        right: 5,
+        zIndex: 1,
+        width: 70,
+        height: 70
     }
 });
 
-export default  MapScreen;
+export default  connect(null, actions) (MapScreen);

@@ -9,6 +9,12 @@ import * as actions from '../actions';
 
  class DeckScreen extends React.Component {
 
+
+     static navigationOptions = {
+         title: 'Jobs',
+         drawerIcon: ({ tintColor }) => ( <Icon name="description" size={25} color={tintColor} /> ),
+     };
+
      renderCard(job) {
          const initialRegion = {
              longitude: job.longitude,
@@ -21,7 +27,7 @@ import * as actions from '../actions';
              <Card title={job.jobtitle}>
                  <View style={{ height: 300 }}>
                      <MapView
-                         scrollEnabled={false}
+                         scrollEnabled={true}
                          style={{ flex: 1 }}
                           cacheEnabled={false}
                          initialRegion={initialRegion} >
@@ -42,13 +48,13 @@ import * as actions from '../actions';
      renderNoMoreCards = () => {
          return (
              <Card title="No More Jobs">
-                 {/*<Button*/}
-                     {/*title="Back To Map"*/}
-                     {/*large*/}
-                     {/*icon={{ name: 'my-location' }}*/}
-                     {/*backgroundColor="#03A9F4"*/}
-                     {/*onPress={() => this.props.navigation.navigate('map')}*/}
-                 {/*/>*/}
+                 <Button
+                     title="Back To Map"
+                     large
+                     icon={{ name: 'my-location' }}
+                     backgroundColor="#03A9F4"
+                     onPress={() => this.props.navigation.navigate('Map')}
+                 />
              </Card>
          );
      };
@@ -62,6 +68,7 @@ import * as actions from '../actions';
                     data={this.props.jobs}
                     renderCard={this.renderCard}
                     renderNoMoreCards={this.renderNoMoreCards}
+                    onSwipeRight={job => this.props.likeJob(job)}
                     keyProp="jobkey"
 
                 />
@@ -94,4 +101,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default connect (mapStateToProps) (DeckScreen);
+export default connect (mapStateToProps, actions) (DeckScreen);

@@ -17,6 +17,8 @@
     },
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "android": {
+   "package": "com.mandhom.hossam" }
   }
 }

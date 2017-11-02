@@ -8,7 +8,10 @@ import * as actions from '../actions';
 
 class MapScreen extends React.Component {
 
-
+    static navigationOptions = {
+        title: 'Map',
+        drawerIcon: ({ tintColor }) => ( <Icon name="my-location" size={25} color={tintColor} /> ),
+    };
 
     state = {
         mapLoaded:false,

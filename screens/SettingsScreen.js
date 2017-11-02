@@ -1,14 +1,25 @@
-import React from 'react';
-import {View , Text , StyleSheet} from 'react-native';
+import React from "react";
+import {StyleSheet, View} from "react-native";
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { clearLikedJobs } from '../actions';
 
-export default class SettingsScreen extends React.Component{
-render(){
-  return(
- <View style={styles.container}>
-    <Text>SettingsScreen oopends</Text>
- </View>
-  );
-}
+
+class SettingsScreen extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+
+              <Button
+                  title="Reset Liked Jobs"
+                  large
+                  icon={{ name: 'delete-forever' }}
+                  backgroundColor="#F44336"
+                  onPress={this.props.clearLikedJobs}
+              />
+            </View>
+        );
+    }
 
 }
 
@@ -23,3 +34,6 @@ const styles = StyleSheet.create({
 
   },
 });
+
+
+export  default  connect(null, { clearLikedJobs}) (SettingsScreen);
